@@ -1,0 +1,115 @@
+/* --- Global & Background Setup --- */
+body {
+    padding-top: 70px;
+    /* Background with a subtle white wash for readability */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
+                      url("../images/background-pattern.png"); /* Use relative path for .css files */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+/* --- Page Sections --- */
+.page-section h2.section-heading {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.page-section h3.section-subheading {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 4rem;
+}
+
+/* --- About Us / Team --- */
+.team-member {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+.team-member img {
+    width: 18rem;
+    height: 18rem;
+    border: 0.5rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%; /* Added to make team photos circular */
+    object-fit: cover;
+}
+
+/* --- Card Animations --- */
+.card {
+    transition: 0.5s;
+    cursor: pointer;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+}
+
+/* --- Contact Styles --- */
+.contact-card {
+    height: 180px;
+}
+.contact-head {
+    font-size: 25px;
+}
+.contact-text {
+    font-weight: 700;
+    color: red;
+}
+
+/* --- Login & Gradients --- */
+.gradient-custom {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+}
+
+/* --- HERO BANNER --- */
+.hero-banner {
+    background-image: url('../images/one.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 85vh; 
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: -70px; 
+    z-index: 1;
+}
+
+/* --- INFINITE IMAGE SLIDER --- */
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(248, 249, 250, 0.5); /* Made slightly transparent to show body bg */
+    padding: 20px 0;
+    position: relative;
+}
+
+.slider-track {
+    display: flex;
+    width: calc(280px * 12); 
+    animation: scrollInfinite 25s linear infinite;
+}
+
+.slider-track img {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 15px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* The Animation Logic */
+@keyframes scrollInfinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-280px * 6)); } 
+}
+
+/* Pause on hover */
+.slider-container:hover .slider-track {
+    animation-play-state: paused;
+}

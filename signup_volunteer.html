@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<section class="min-vh-100 gradient-custom py-5">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5">
+            
+            <h2 class="fw-bold mb-2 text-uppercase text-center">Volunteer Sign Up</h2>
+            <p class="text-white-50 mb-4 text-center">Please enter following details</p>
+            
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              
+              <div class="row">
+                {% for fm in form1 %}
+                  <div class="form-group col-md-6 mb-3">
+                    {{ fm.label_tag }} 
+                    {{ fm }} 
+                    <small class="text-danger">{{ fm.errors|striptags }}</small>
+                  </div>
+                {% endfor %}
+
+                {% for fm in form2 %}
+                  <div class="form-group col-md-12 mb-3">
+                    {{ fm.label_tag }} 
+                    {{ fm }} 
+                    <small class="text-danger">{{ fm.errors|striptags }}</small>
+                  </div>
+                {% endfor %}
+              </div>
+
+              <div class="d-grid gap-2">
+                <input type="submit" value="Register Now" class="mt-4 btn btn-primary btn-lg">
+              </div>
+
+              <div class="mt-4 text-center">
+                <p class="mb-0">Already have an account? <a href="{% url 'login_volunteer' %}" class="text-white-50 fw-bold">Login</a></p>
+              </div>
+
+              {% if form1.non_field_errors or form2.non_field_errors %}
+                <div class="mt-3">
+                  {% for error in form1.non_field_errors %}<p class="alert alert-danger">{{ error }}</p>{% endfor %}
+                  {% for error in form2.non_field_errors %}<p class="alert alert-danger">{{ error }}</p>{% endfor %}
+                </div>
+              {% endif %}
+            </form>
+
+            {% if messages %}
+              <div class="mt-3">
+                {% for message in messages %}
+                  <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock main %}

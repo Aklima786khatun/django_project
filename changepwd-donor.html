@@ -1,0 +1,32 @@
+{% extends 'base-db-donor.html' %}
+{% load static %}
+{% block main %}
+
+<div class="container mt-5 vh-100 table-responsive">
+    <h3>Change Password</h3>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 offset-md-3"> <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div class="form-group col-sm-12 p-2">
+                        <label class="form-label">{{ fm.label }}</label>
+                        {{ fm }} 
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
+                {% endfor %}
+                
+                <div class="d-grid gap-2 mt-3">
+                    <input type="submit" value="Change Password" class="btn btn-primary">
+                </div>
+            </form>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }} mt-3">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
