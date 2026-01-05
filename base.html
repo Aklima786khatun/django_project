@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CSC Society Assam{% endblock title %}</title>
+    
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.1.png' %}" />
+    
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;100;300;700&family=Mansalva&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body { top: 0px !important; position: static !important; overflow-x: hidden; }
+        .skiptranslate > iframe { display: none !important; }
+        
+        /* Navigation & Bars */
+        .top-bar-1 { background-color: #ffc107; color: #000; font-size: 0.85rem; padding: 4px 0; z-index: 1100; height: 30px; }
+        .top-bar-2 { background-color: #004a99; color: white; font-size: 0.85rem; padding: 5px 0; z-index: 1090; top: 30px !important; min-height: 45px; }
+        .top-bar-2 a { color: white; text-decoration: none; margin-left: 15px; transition: 0.3s; }
+        .top-bar-2 a:hover { color: #ffc107; }
+        
+        /* Navbar Sticky Logic */
+        .navbar { 
+            z-index: 1080; 
+            transition: all 0.3s ease-in-out; 
+            top: 75px !important; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        } 
+        .navbar.sticky { 
+            top: 0 !important; 
+            background: rgba(33, 37, 41, 0.98) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        /* FULL HEIGHT SLIDER LOGIC 
+           100vh = 100% of Viewport Height 
+        */
+        .content-wrapper { margin-top: 0; min-height: 100vh; }
+        
+        .ftco-cover-1 { 
+            position: relative; 
+            background-size: cover; 
+            background-position: center center; 
+            height: 100vh; /* Full Height */
+            width: 100%;
+            display: flex; 
+            align-items: center; 
+        }
+        .ftco-cover-1::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Overlay for text contrast */
+        }
+        .ftco-cover-1 .container { position: relative; z-index: 2; padding-top: 80px; }
+
+        /* Smooth scrolling for anchor links */
+        html { scroll-behavior: smooth; }
+
+        @media (max-width: 991px) {
+            .top-bar-2 .container { flex-direction: column; text-align: center; }
+            .navbar { top: 110px !important; }
+            .ftco-cover-1 h1 { font-size: 2.2rem; }
+        }
+
+        #google_translate_element select { background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; padding: 2px 5px; font-size: 12px; }
+        #scrollTop { position: fixed; bottom: 30px; right: 30px; display: none; z-index: 2000; border-radius: 50%; width: 50px; height: 50px; border: none; }
+        
+        .owl-dots { position: absolute; bottom: 40px; width: 100%; text-align: center; z-index: 10; }
+        .owl-dot span { background: rgba(255,255,255,0.5) !important; width: 12px; height: 12px; margin: 5px 7px; display: block; border-radius: 30px; }
+        .owl-dot.active span { background: #ffc107 !important; }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div class="top-bar-1 fixed-top shadow-sm">
+        <div class="container">
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+                <strong>Latest:</strong> Help us build a Digital Assam. New volunteer orientations start every Monday! | Support our latest causes.
+            </marquee>
+        </div>
+    </div>
+
+    <div class="top-bar-2 fixed-top d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="contact-info">
+                <span><i class="fas fa-envelope me-1"></i> info@cscsocietyassam.com</span>
+                <span class="ms-3 d-none d-sm-inline"><i class="fas fa-phone me-1"></i> +91 7086487028</span>
+            </div>
+            
+            <div class="social-translate d-flex align-items-center">
+                <div id="google_translate_element" class="me-3"></div> 
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'index' %}">
+                <img src="{% static 'images/logo.1.png' %}" width="35" alt="Logo" class="me-2 d-inline-block align-middle" />
+                CSC SOCIETY
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navRes">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navRes">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Mission</a>
+                        <ul class="dropdown-menu shadow border-0">
+                            <li><a class="dropdown-item" href="{% url 'index' %}#mission">Our Mission</a></li>
+                            <li><a class="dropdown-item" href="{% url 'index' %}#vision">Our Vision</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}#activity">Activity</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark fw-bold ms-lg-3 px-4 rounded-pill shadow-sm" href="{% url 'index' %}#dovo">Donate</a></li>
+                    <li class="nav-item dropdown ms-lg-2">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-lg me-1"></i> Login
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="{% url 'login_donor' %}">Donor</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login_volunteer' %}">Volunteer</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'login_admin' %}">Admin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-wrapper">
+        <div class="owl-carousel owl-1">
+            <div class="ftco-cover-1" style="background-image: url('{% static 'images/hero_1.jpg' %}');">
+                <div class="container text-white text-center">
+                    <h1 class="display-3 fw-bold mb-3">Empowering Assam</h1>
+                    <p class="lead mb-4 fs-4">Building a digitally inclusive society through CSC services and community support.</p>
+                    <div>
+                        <a href="{% url 'about' %}" class="btn btn-warning btn-lg px-5 py-3 fw-bold rounded-pill shadow">LEARN MORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ftco-cover-1" style="background-image: url('{% static 'images/hero_2.jpg' %}');">
+                <div class="container text-white text-center">
+                    <h1 class="display-3 fw-bold mb-3">Support Our Cause</h1>
+                    <p class="lead mb-4 fs-4">Join hands with us to make a difference in rural development and digital literacy.</p>
+                    <div>
+                        <a href="{% url 'index' %}#dovo" class="btn btn-warning btn-lg px-5 py-3 fw-bold rounded-pill shadow">DONATE NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block main %}{% endblock main %}
+    </main>
+
+    <button type="button" class="btn btn-warning shadow" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    {% include 'base-footer.html' %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.owl-1').owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 0,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 6000,
+                smartSpeed: 1200,
+                autoplayHoverPause: true,
+                animateOut: 'fadeOut' // Optional: Smooth fade effect
+            });
+
+            $(window).scroll(function() {
+                // If scroll > 75px (past the top bars), move navbar to top 0
+                if ($(this).scrollTop() > 75) { 
+                    $('#mainNav').addClass('sticky');
+                } else { 
+                    $('#mainNav').removeClass('sticky');
+                }
+
+                // Show scroll top button
+                if ($(this).scrollTop() > 500) {
+                    $('#scrollTop').fadeIn();
+                } else {
+                    $('#scrollTop').fadeOut();
+                }
+            });
+
+            $('#scrollTop').click(function() {
+                $('html, body').animate({scrollTop: 0}, 600);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
